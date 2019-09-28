@@ -1,4 +1,4 @@
-package ru.bashedu.railwaydiagnostics.dao.user;
+package ru.bashedu.railwaydiagnostics.dao.worker;
 
 import ru.bashedu.railwaydiagnostics.dao.BaseObjectMapper;
 
@@ -14,7 +14,7 @@ public class WorkerMapper implements BaseObjectMapper<Worker> {
         map.put("id", worker.getId());
         map.put("is_in_trip", worker.getIsInTrip());
         map.put("train_id", worker.getTrainId());
-        map.put("device", worker.getDevice());
+        map.put("device_id", worker.getDeviceId());
         map.put("coefficient", worker.getCoefficient());
         return map;
     }
@@ -25,7 +25,7 @@ public class WorkerMapper implements BaseObjectMapper<Worker> {
             .id(rs.getLong("id"))
             .isInTrip(rs.getBoolean("is_in_trip"))
             .trainId(rs.getLong("train_id"))
-            .device(rs.getString("device"))
+            .deviceId(rs.getLong("device_id"))
             .coefficient(rs.getDouble("coefficient"))
             .build();
     }
