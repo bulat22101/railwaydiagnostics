@@ -1,18 +1,19 @@
 package ru.bashedu.railwaydiagnostics.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RailwayDiagnosticsController {
 
-    @GetMapping("/leap")
-    public void leap() {
+    @PostMapping("/leap")
+    public String leap() {
+        return "OK!";
     }
 
     @GetMapping("/start")
-    public Double start(@RequestParam Long id, @RequestParam(value = "train") Long trainId, @RequestParam String device) {
+    public Double start() {
         return 1.0;
     }
 

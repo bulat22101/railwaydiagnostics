@@ -31,4 +31,11 @@ public class WorkerDao extends BaseDao<Worker> {
             Double.class,
             id).stream().filter(Objects::nonNull).findFirst();
     }
+
+    public Optional<Worker> getWorker(Long id){
+        return jdbcTemplate.queryForList(
+            String.format("SELECT * FROM %s WHERE id = ?", tableName),
+            new WorkerMapper(),
+            id).stream().filter(Objects::nonNull).findFirst().map(Worker.class::cast);
+    }
 }

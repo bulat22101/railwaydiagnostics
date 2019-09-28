@@ -7,6 +7,7 @@ import ru.bashedu.railwaydiagnostics.dao.device.DeviceDao;
 import ru.bashedu.railwaydiagnostics.dao.leap.LeapDao;
 import ru.bashedu.railwaydiagnostics.dao.train.TrainDao;
 import ru.bashedu.railwaydiagnostics.dao.worker.WorkerDao;
+import ru.bashedu.railwaydiagnostics.service.SimpleMainService;
 
 @Configuration
 public class MainConfig {
@@ -27,12 +28,21 @@ public class MainConfig {
     }
 
     @Bean
-    TrainDao trainDao(){
+    TrainDao trainDao() {
         return new TrainDao(jdbcTemplate);
     }
 
     @Bean
-    DeviceDao deviceDao(){
+    DeviceDao deviceDao() {
         return new DeviceDao(jdbcTemplate);
+    }
+
+    @Bean
+    SimpleMainService simpleMainService(
+        WorkerDao workerDao,
+        DeviceDao deviceDao,
+        TrainDao trainDao
+    ) {
+        return new SimpleMainService(workerDao, deviceDao, trainDao);
     }
 }
