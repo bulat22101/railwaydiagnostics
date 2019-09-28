@@ -41,8 +41,9 @@ public class MainConfig {
     SimpleMainService simpleMainService(
         WorkerDao workerDao,
         DeviceDao deviceDao,
-        TrainDao trainDao
+        TrainDao trainDao,
+        LeapDao leapDao
     ) {
-        return new SimpleMainService(workerDao, deviceDao, trainDao);
+        return new SimpleMainService(workerDao, deviceDao, trainDao, leapDao);
     }
 }

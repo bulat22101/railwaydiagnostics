@@ -18,7 +18,7 @@ public class LeapMapper implements BaseObjectMapper<Leap> {
         map.put("device_id", leap.getDeviceId());
         map.put("time", leap.getTime().toString());
         map.put("location", leap.getLocation());
-        map.put("leap", leap.getLeap());
+        map.put("acceleration", leap.getAcceleration());
         return map;
     }
 
@@ -26,12 +26,12 @@ public class LeapMapper implements BaseObjectMapper<Leap> {
     public Leap mapRow(ResultSet rs, int rowNum) throws SQLException {
         return Leap.builder()
             .id(rs.getLong("id"))
-            .trainId(rs.getLong("id"))
-            .workerId(rs.getLong("id"))
+            .trainId(rs.getLong("train_id"))
+            .workerId(rs.getLong("worker_id"))
             .deviceId(rs.getLong("device_id"))
             .time(Instant.parse(rs.getString("time")))
             .location(rs.getString("location"))
-            .leap(rs.getDouble("leap"))
+            .acceleration(rs.getDouble("acceleration"))
             .build();
     }
 }
