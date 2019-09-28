@@ -21,17 +21,15 @@ public class RailwayDiagnosticsController {
     }
 
     @RequestMapping(value = "/start", method = RequestMethod.GET, produces = "application/json")
-    //public ThresholdDto response(
-    public Double response(
+    public ThresholdDto response(
         @RequestParam Long id,
         @RequestParam(value = "train_id") Long trainId,
         @RequestParam String device
     ) {
         System.err.println("/start");
         Long deviceId = mainService.getOrCreateDevice(device);
-        //return new ThresholdDto(mainService.startTrip(id, trainId, deviceId));
-        //TODO: вернуть отправку JSON, когда будет готов клиент
-        return mainService.startTrip(id, trainId, deviceId);
+        return new ThresholdDto(mainService.startTrip(id, trainId, deviceId));
+
     }
 
     @GetMapping("/stop")
