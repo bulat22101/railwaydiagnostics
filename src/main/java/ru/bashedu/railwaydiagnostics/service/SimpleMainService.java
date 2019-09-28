@@ -17,18 +17,20 @@ public class SimpleMainService implements MainService {
     private final TrainDao trainDao;
 
     @Override
-    public Double startTrip(Long workerId, Long deviceId, Long trainId) {
-        Optional<Worker> worker = workerDao.getWorker(workerId);
-        if (!worker.isPresent()) {
+    public Double startTrip(Long workerId,Long trainId, Long deviceId) {
+        Optional<Boolean>isInTrip = workerDao.isInTrip(workerId);
+        if (!isInTrip.isPresent()) {
             throw new IllegalArgumentException("No such worker");
         }
-        Optional<Boolean> isInTrip = worker.map(Worker::getIsInTrip);
         if (isInTrip.orElse(true)) {
             throw new IllegalArgumentException("Can't start trip, because worker trip status is " + isInTrip.orElse(null));
         }
         Double trainCoefficient = trainDao.getCoefficient(trainId).orElse(1d);
-        Double workerCoefficient = worker.map(Worker::getCoefficient).orElse(1d);
+        System.err.println(trainCoefficient);
+        Double workerCoefficient =workerDao.getCoefficient(workerId).orElse(1d);
+        System.err.println(workerCoefficient);
         Double deviceCoefficient = deviceDao.getCoefficient(deviceId).orElse(1d);
+        System.err.println(deviceCoefficient);
         return trainCoefficient * workerCoefficient * deviceCoefficient * ACCELERATION_THRESHOLD;
     }
 
@@ -36,11 +38,7 @@ public class SimpleMainService implements MainService {
     public Long getOrCreateDevice(String deviceName) {
         Optional<Long> deviceId = deviceDao.getId(deviceName);
         if (!deviceId.isPresent()) {
-            Device device = Device.builder()
-                .deviceName(deviceName)
-                .coefficient(1d)
-                .build();
-            deviceId = Optional.ofNullable(deviceDao.save(device)).map(Device::getId);
+            deviceId = Optional.ofNullable(deviceDao.appendDevice(deviceName)).map(Device::getId);
         }
         return deviceId.orElse(null);
     }
