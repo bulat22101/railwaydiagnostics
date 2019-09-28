@@ -14,5 +14,5 @@ public class Leap {
     private Long deviceId;
     private Instant time;
     private String location;
-    private Double leap;
+    private Double acceleration;
 }

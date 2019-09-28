@@ -3,11 +3,13 @@ package ru.bashedu.railwaydiagnostics.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bashedu.railwaydiagnostics.dto.ThresholdDto;
+import ru.bashedu.railwaydiagnostics.dto.leap.LeapsDto;
 import ru.bashedu.railwaydiagnostics.service.MainService;
 
 @RestController
@@ -16,8 +18,8 @@ public class RailwayDiagnosticsController {
     private final MainService mainService;
 
     @PostMapping("/leap")
-    public String leap() {
-        return "OK!";
+    public void leap(@RequestBody LeapsDto leapsDto) {
+        mainService.saveLeaps(leapsDto);
     }
 
     @RequestMapping(value = "/start", method = RequestMethod.GET, produces = "application/json")
