@@ -24,4 +24,12 @@ public class DeviceDao extends BaseDao<Device> {
             Long.class,
             deviceName).stream().findFirst();
     }
+
+    public Device appendDevice(String deviceName){
+        return jdbcTemplate.query(
+            String.format("INSERT INTO %s (id, device_name, coefficient) VALUES (DEFAULT, ?, 1) RETURNING *", tableName),
+            objectMapper,
+            deviceName
+        ).stream().filter(Objects::nonNull).findFirst().orElse(null);
+    }
 }
