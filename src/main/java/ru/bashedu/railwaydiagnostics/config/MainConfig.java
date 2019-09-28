@@ -3,7 +3,10 @@ package ru.bashedu.railwaydiagnostics.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-import ru.bashedu.railwaydiagnostics.dao.user.WorkerDao;
+import ru.bashedu.railwaydiagnostics.dao.device.DeviceDao;
+import ru.bashedu.railwaydiagnostics.dao.leap.LeapDao;
+import ru.bashedu.railwaydiagnostics.dao.train.TrainDao;
+import ru.bashedu.railwaydiagnostics.dao.worker.WorkerDao;
 
 @Configuration
 public class MainConfig {
@@ -14,7 +17,22 @@ public class MainConfig {
     }
 
     @Bean
-    WorkerDao userDao(){
+    WorkerDao workerDao() {
         return new WorkerDao(jdbcTemplate);
+    }
+
+    @Bean
+    LeapDao leapDao() {
+        return new LeapDao(jdbcTemplate);
+    }
+
+    @Bean
+    TrainDao trainDao(){
+        return new TrainDao(jdbcTemplate);
+    }
+
+    @Bean
+    DeviceDao deviceDao(){
+        return new DeviceDao(jdbcTemplate);
     }
 }

@@ -1,4 +1,4 @@
-package ru.bashedu.railwaydiagnostics.dao.user;
+package ru.bashedu.railwaydiagnostics.dao.worker;
 
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +9,6 @@ public class Worker {
     private Long id;
     private Boolean isInTrip;
     private Long trainId;
-    private String device;
+    private Long deviceId;
     private Double coefficient;
 }
