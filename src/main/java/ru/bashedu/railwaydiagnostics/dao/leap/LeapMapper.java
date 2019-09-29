@@ -16,8 +16,9 @@ public class LeapMapper implements BaseObjectMapper<Leap> {
         map.put("train_id", leap.getTrainId());
         map.put("worker_id", leap.getWorkerId());
         map.put("device_id", leap.getDeviceId());
-        map.put("time", leap.getTime().toString());
-        map.put("location", leap.getLocation());
+        map.put("time", leap.getTime());
+        map.put("latitude", leap.getLatitude());
+        map.put("longitude", leap.getLongitude());
         map.put("acceleration", leap.getAcceleration());
         return map;
     }
@@ -29,8 +30,9 @@ public class LeapMapper implements BaseObjectMapper<Leap> {
             .trainId(rs.getLong("train_id"))
             .workerId(rs.getLong("worker_id"))
             .deviceId(rs.getLong("device_id"))
-            .time(Instant.parse(rs.getString("time")))
-            .location(rs.getString("location"))
+            .time(rs.getLong("time"))
+            .latitude(rs.getDouble("latitude"))
+            .longitude(rs.getDouble("longitude"))
             .acceleration(rs.getDouble("acceleration"))
             .build();
     }

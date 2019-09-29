@@ -75,7 +75,8 @@ public class SimpleMainService implements MainService {
             .deviceId(worker.map(Worker::getDeviceId).orElse(null))
             .trainId(worker.map(Worker::getTrainId).orElse(null))
             .time(leapDto.getCreation())
-            .location(leapDto.getLocation())
+            .latitude(leapDto.getLatitude())
+            .longitude(leapDto.getLongitude())
             .acceleration(leapDto.getAcceleration())
             .build();
     }

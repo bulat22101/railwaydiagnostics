@@ -2,11 +2,10 @@ package ru.bashedu.railwaydiagnostics.dto.leap;
 
 import lombok.Data;
 
-import java.time.Instant;
-
 @Data
 public class LeapDto {
-    private Instant creation;
+    private Long creation;
     private double acceleration;
-    private String location;
+    private Double longitude;
+    private Double latitude;
 }
