@@ -21,14 +21,15 @@ public class LeapDao extends BaseDao<Leap> {
                 leap.getWorkerId(),
                 leap.getTrainId(),
                 leap.getDeviceId(),
-                leap.getTime().toString(),
-                leap.getLocation(),
+                leap.getTime(),
+                leap.getLatitude(),
+                leap.getLongitude(),
                 leap.getAcceleration()
             })
             .collect(Collectors.toList());
         jdbcTemplate.batchUpdate(
             String.format(
-                "INSERT INTO %s (id, worker_id, train_id, device_id, time, location, acceleration) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO %s (id, worker_id, train_id, device_id, time, latitude, longitude, acceleration) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)",
                 tableName
             ),
             params

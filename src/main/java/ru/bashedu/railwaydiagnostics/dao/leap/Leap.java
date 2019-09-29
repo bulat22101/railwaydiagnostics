@@ -3,8 +3,6 @@ package ru.bashedu.railwaydiagnostics.dao.leap;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.Instant;
-
 @Data
 @Builder
 public class Leap {
@@ -12,7 +10,8 @@ public class Leap {
     private Long trainId;
     private Long workerId;
     private Long deviceId;
-    private Instant time;
-    private String location;
+    private Long time;
+    private Double latitude;
+    private Double longitude;
     private Double acceleration;
 }
