@@ -3,10 +3,13 @@ package ru.bashedu.railwaydiagnostics.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.mail.javamail.JavaMailSender;
 import ru.bashedu.railwaydiagnostics.dao.device.DeviceDao;
 import ru.bashedu.railwaydiagnostics.dao.leap.LeapDao;
 import ru.bashedu.railwaydiagnostics.dao.train.TrainDao;
 import ru.bashedu.railwaydiagnostics.dao.worker.WorkerDao;
+import ru.bashedu.railwaydiagnostics.service.MailService;
+import ru.bashedu.railwaydiagnostics.service.SimpleMailService;
 import ru.bashedu.railwaydiagnostics.service.SimpleMainService;
 
 @Configuration
@@ -45,5 +48,10 @@ public class MainConfig {
         LeapDao leapDao
     ) {
         return new SimpleMainService(workerDao, deviceDao, trainDao, leapDao);
+    }
+
+    @Bean
+    public MailService mailService(JavaMailSender javaMailSender) {
+        return new SimpleMailService(javaMailSender);
     }
 }
